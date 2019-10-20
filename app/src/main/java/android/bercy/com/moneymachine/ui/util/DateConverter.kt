@@ -1,4 +1,4 @@
-package android.bercy.com.moneymachine.ui.db
+package android.bercy.com.moneymachine.ui.util
 
 import androidx.room.TypeConverter
 import java.sql.Date

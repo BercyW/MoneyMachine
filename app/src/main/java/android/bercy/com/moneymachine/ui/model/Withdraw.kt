@@ -10,7 +10,7 @@ data class Withdraw(
     @ColumnInfo(name = "id") var id: Int = 0,
     @ColumnInfo(name = "userName") var userName:String? = null,
     @ColumnInfo(name = "deposit") var deposit: String? = null,
-    @ColumnInfo(name = "withdraw") var withdraw: String? = null,
+    @ColumnInfo(name = "amount") var amount: String? = null,
     @ColumnInfo(name = "date") var date: Date? = null,
     @ColumnInfo(name = "tag") var tag: String? = null
 )

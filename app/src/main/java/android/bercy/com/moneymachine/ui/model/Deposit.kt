@@ -10,6 +10,6 @@ import java.util.*
 data class Deposit(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") var id: Int = 0,
-    @ColumnInfo(name = "deposit") var deposit: String? = null,
+    @ColumnInfo(name = "amount") var amount: String? = null,
     @ColumnInfo(name = "date") var date: Date? = null
 )
