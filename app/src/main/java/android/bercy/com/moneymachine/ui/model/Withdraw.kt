@@ -6,11 +6,12 @@ import androidx.room.PrimaryKey
 import java.sql.Date
 
 @Entity(tableName = "withdraw")
-data class Withdraw(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") var id: Int = 0,
+data class Withdraw(@PrimaryKey(autoGenerate = true) var id: Long?,
     @ColumnInfo(name = "userName") var userName:String? = null,
-    @ColumnInfo(name = "amount") var amount: String? = null,
-    @ColumnInfo(name = "date") var date: Date? = null,
+    @ColumnInfo(name = "amount") var amount: Long,
+    @ColumnInfo(name = "description") var description: String? = null,
+    @ColumnInfo(name = "date") var date: String? = null,
     @ColumnInfo(name = "tag") var tag: String? = null
-)
+){
+    constructor():this(null,"", 0L,"","","")
+}

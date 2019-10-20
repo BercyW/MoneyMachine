@@ -106,20 +106,34 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toEndOf="@+id/tv_amount"
             app:layout_constraintTop_toBottomOf="@+id/tv_date"
-            android:autofillHints="Enter Amount"
+            android:hint="@string/enter_amount"
             android:inputType="number" />
 
+        <EditText
+            android:id="@+id/et_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_amount" />
+
+
         <Button
-            android:id="@+id/deposit_enter"
+            android:id="@+id/enter_amount_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:onClick="onEnterPressed"
             android:text="@string/enter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_amount" />
+            app:layout_constraintTop_toBottomOf="@+id/et_description" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -128,6 +142,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/et_amount"
             app:layout_constraintTop_toBottomOf="@+id/tv_date" />

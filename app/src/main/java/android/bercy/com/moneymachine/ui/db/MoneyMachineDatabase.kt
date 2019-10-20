@@ -2,7 +2,6 @@ package android.bercy.com.moneymachine.ui.db
 
 import android.bercy.com.moneymachine.ui.model.Deposit
 import android.bercy.com.moneymachine.ui.model.Withdraw
-import android.bercy.com.moneymachine.ui.util.DateConverter
 import android.content.Context
 import androidx.databinding.adapters.Converters
 import androidx.room.Database
@@ -15,7 +14,7 @@ import androidx.room.TypeConverters
     version = 1,
     exportSchema = false
 )
-@TypeConverters(DateConverter::class)
+//@TypeConverters(DateConverter::class)
 abstract class MoneyMachineDatabase : RoomDatabase() {
     abstract fun depositDao() : DepositDao
     abstract fun withDrawDao() : WithdrawDao

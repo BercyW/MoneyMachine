@@ -22,11 +22,10 @@ class DepositLocalCache(
     //insert one deposit each time
     fun insert(deposit:Deposit) {
         ioExecutor.execute {
-            Log.d("boxi","insert deposit amount : ${deposit.amount}")
             depositDao?.insert(deposit)
+            Log.d("boxi","insert deposit amount : ${deposit.amount}")
         }
     }
-
 
 
 

@@ -11,7 +11,8 @@
     <string name="_10_19_2019">10-19-2019</string>
     <string name="search">Search</string>
     <string name="summary">summary</string>
-
+    <string name="description">Description</string>
+    <string name="enter_amount">Enter Amount</string>
 
 
     <string-array name="tag_transaction">

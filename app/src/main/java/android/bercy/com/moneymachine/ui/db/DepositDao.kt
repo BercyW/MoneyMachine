@@ -13,5 +13,6 @@ interface DepositDao{
     fun insert(deposit:Deposit?)
 
 
-
+    @Query("select * from deposit")
+    fun selectDeposit() : List<Deposit>?
 }
