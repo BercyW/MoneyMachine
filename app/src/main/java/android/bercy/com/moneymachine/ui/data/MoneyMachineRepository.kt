@@ -5,14 +5,20 @@ import android.bercy.com.moneymachine.ui.model.Withdraw
 
 
 /**
- * by using localcache, we can pass service call in the future,
+ * by passing localcache, we can pass service call in the future,
  * it will works with local and remote data source
+ *
  */
+
 class MoneyMachineRepository (
     private val depositCache:DepositLocalCache,
     private val withdrawLocalCache: WithdrawLocalCache
 ) {
 
+
+    /**
+     * for local cache
+     */
 
     //for deposit
     fun insertDepositData(deposit: Deposit) {
@@ -23,6 +29,22 @@ class MoneyMachineRepository (
     fun insertWithdrawData(withdraw:Withdraw) {
         withdrawLocalCache
     }
+
+
+
+    //todo summary
+
+
+    //todo search
+
+
+    /**
+     * below here for remote in the future, add boundary callback if using pagedlist
+     */
+
+
+
+
 
 
 

@@ -8,6 +8,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import javax.security.auth.callback.Callback
 
+
+/**
+ *
+ * the logic here is when password and user name passed, I added "success" string to livedata, when livedata has
+ * chagned, it will allow to login.
+ */
+
 class LoginViewModel(application: Application) : AndroidViewModel(application),Callback{
 
     /**
@@ -36,7 +43,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application),C
         btnSelected?.set(Util.isPasswordValid(s.toString()))
     }
 
-    //just for mocking
+    /**
+     *  sorry for not getting result from Db, spent too much time on the login UI layout. : (
+     */
     fun login() {
         val util = Util()
         val username = username?.get()
@@ -45,7 +54,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application),C
         if((username == "abc") && (password == "123")) {
             userLogin?.value = "success"
         }else {
-            util?.loginValidation(false)
+            util.loginValidation(false)
         }
     }
 }

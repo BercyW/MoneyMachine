@@ -11,7 +11,8 @@ import java.util.concurrent.Executors
 
 
 /**
- * the benefit to
+ * the benefit to use this class is
+ * we can pass these object as parameters in the constructors and then replace it for testing.
  */
 
 object Injection {

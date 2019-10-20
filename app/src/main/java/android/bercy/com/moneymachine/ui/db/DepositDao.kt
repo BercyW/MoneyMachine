@@ -10,7 +10,7 @@ import androidx.room.Query
 interface DepositDao{
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(deposit:Deposit)
+    fun insert(deposit:Deposit?)
 
 
 
