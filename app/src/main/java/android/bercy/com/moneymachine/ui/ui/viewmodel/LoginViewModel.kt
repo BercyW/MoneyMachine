@@ -41,6 +41,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application),C
         val util = Util()
         val username = username?.get()
         val password = password?.get()
+
         if((username == "abc") && (password == "123")) {
             userLogin?.value = "success"
         }else {

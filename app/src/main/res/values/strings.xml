@@ -3,4 +3,27 @@
     <string name="login">Login</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
+    <string name="deposit">Deposit</string>
+    <string name="amount">Amount:</string>
+    <string name="enter">Enter</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="user">User: %s</string>
+    <string name="_10_19_2019">10-19-2019</string>
+    <string name="search">Search</string>
+    <string name="summary">summary</string>
+
+
+    <string-array name="tag_transaction">
+        <item>Food</item>
+        <item>Health</item>
+        <item>Home</item>
+        <item>Tech</item>
+        <item>Vehicle</item>
+        <item>Cloth</item>
+        <item>Account</item>
+        <item>Other</item>
+    </string-array>
+    
+    
+    
 </resources>

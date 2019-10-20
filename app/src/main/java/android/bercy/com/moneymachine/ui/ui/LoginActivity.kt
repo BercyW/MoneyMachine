@@ -16,6 +16,10 @@ class LoginActivity : AppCompatActivity() {
     private var binding : ActivityLoginBinding? =null
     private var viewmodel: LoginViewModel? = null
 
+    /**
+     * The right implementation should be insert a user table before the app starting,
+     * since this is not important for this test, I didn't optimize this part.
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,16 +31,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initObservables() {
         viewmodel?.userLogin?.observe(this, Observer {
-            success()
+            onSuccess()
         })
     }
 
-    /**
-     * The right implementation should be insert a user table before the app starting,
-     * since this is not important for this test, I didn't optimize this part.
-     */
-    private fun success() {
+
+    private fun onSuccess() {
         val homePage = Intent(this,MainActivity::class.java)
+        homePage.putExtra("UserName",viewmodel?.username?.get())
         startActivity(homePage)
         Toast.makeText(this, "welcome ${viewmodel?.username?.get()}", Toast.LENGTH_LONG).show()
     }
