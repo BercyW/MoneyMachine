@@ -1,5 +1,9 @@
 # MoneyMachine
 
+Login:
+user name : abc
+password : 123
+
 Tools:
 Livedata, databinding,coroutine,room, viewmodel, mvvm
 
