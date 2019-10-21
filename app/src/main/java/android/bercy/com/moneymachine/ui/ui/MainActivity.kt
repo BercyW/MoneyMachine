@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_main.*
 import java.time.LocalDateTime
@@ -38,6 +40,22 @@ class MainActivity : AppCompatActivity() {
             .get(HomeScreenViewModel::class.java)
 
         setupSpinner()
+
+        initBalance()
+
+    }
+    //observe the deposit and withdraw
+    private fun initBalance() {
+        viewModel.getTotalDeposit().observe(this, Observer {
+            calculateBalance(it)
+            Log.d("boxi","deposit amount has changed to $it")
+        })
+    }
+
+    //calculate the balance
+    //todo need to minus withdraw
+    private fun calculateBalance(balance: Long?) {
+        tv_balance.text=balance.toString()
     }
 
     private fun setupSpinner() {
@@ -98,12 +116,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
+    /**
+     * pressd enter button
+     */
     fun onEnterPressed(view: View) {
 
         val userName = userName
-        val amount = et_amount.text.toString().toLong()
+
+        var amount = et_amount.text.toString()
+        if(amount == "") amount = "0"
+
         val description  = et_description.text.toString()
 
 
@@ -113,7 +135,7 @@ class MainActivity : AppCompatActivity() {
             //create obj
             val deposit = Deposit()
             deposit.userName = userName
-            deposit.amount = amount
+            deposit.amount = amount.toLong()
             deposit.description = description
             deposit.date = formatted
 
@@ -128,7 +150,7 @@ class MainActivity : AppCompatActivity() {
             //create obj
             val withdraw = Withdraw()
             withdraw.userName=userName
-            withdraw.amount=amount
+            withdraw.amount=amount.toLong()
             withdraw.description=description
             withdraw.date = formatted
             withdraw.tag = tag

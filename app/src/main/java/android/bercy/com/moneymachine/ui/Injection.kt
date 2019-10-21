@@ -16,20 +16,20 @@ import java.util.concurrent.Executors
  */
 
 object Injection {
-    private var database : MoneyMachineDatabase? =null
+    private lateinit var database : MoneyMachineDatabase
 
     fun provideViewModelFacotry(context: Context):ViewModelProvider.Factory {
         database = MoneyMachineDatabase.getInstance(context)
-        return ViewModelFactory(provideMoneyMachineRepository(context))
+        return ViewModelFactory(provideMoneyMachineRepository())
     }
 
-    private fun provideMoneyMachineRepository(context: Context):MoneyMachineRepository {
-        return MoneyMachineRepository(provideDepositLocalCache(context),provideWithdrawLocalCache(context))
+    private fun provideMoneyMachineRepository():MoneyMachineRepository {
+        return MoneyMachineRepository(provideDepositLocalCache(),provideWithdrawLocalCache())
     }
-    private fun provideDepositLocalCache(context: Context) :DepositLocalCache{
-        return DepositLocalCache(database?.depositDao(), Executors.newSingleThreadExecutor())
+    private fun provideDepositLocalCache() :DepositLocalCache{
+        return DepositLocalCache(database.depositDao(), Executors.newSingleThreadExecutor())
     }
-    private fun provideWithdrawLocalCache(context: Context) :WithdrawLocalCache{
-        return WithdrawLocalCache(database?.withDrawDao(),Executors.newSingleThreadExecutor())
+    private fun provideWithdrawLocalCache() :WithdrawLocalCache{
+        return WithdrawLocalCache(database.withDrawDao(),Executors.newSingleThreadExecutor())
     }
 }

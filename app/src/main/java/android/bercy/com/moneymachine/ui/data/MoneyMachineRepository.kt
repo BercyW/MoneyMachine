@@ -2,6 +2,9 @@ package android.bercy.com.moneymachine.ui.data
 
 import android.bercy.com.moneymachine.ui.model.Deposit
 import android.bercy.com.moneymachine.ui.model.Withdraw
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 
 /**
@@ -14,8 +17,6 @@ class MoneyMachineRepository (
     private val depositCache:DepositLocalCache,
     private val withdrawLocalCache: WithdrawLocalCache
 ) {
-
-
     /**
      * for local cache
      */
@@ -27,9 +28,15 @@ class MoneyMachineRepository (
 
     //for withdraw
     fun insertWithdrawData(withdraw:Withdraw) {
-        withdrawLocalCache
+        withdrawLocalCache.insert(withdraw)
     }
 
+
+    //getTotal deposit amount
+    fun getTotalDeposit(): LiveData<Long> {
+        return depositCache.getTotalDepositAmount()
+
+    }
 
 
     //todo summary

@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.ui.MainActivity">
 
+
+    <TextView
+        android:id="@+id/tv_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/balance"
+        android:visibility="invisible"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/deposit_button"
         android:layout_width="wrap_content"

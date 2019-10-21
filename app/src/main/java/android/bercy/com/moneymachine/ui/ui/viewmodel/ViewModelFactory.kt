@@ -11,6 +11,6 @@ class ViewModelFactory(private val repository: MoneyMachineRepository) : ViewMod
             @Suppress("UNCHECKED_CAST")
             return HomeScreenViewModel(repository) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException("Unknown ViewModel class") as Throwable
     }
 }

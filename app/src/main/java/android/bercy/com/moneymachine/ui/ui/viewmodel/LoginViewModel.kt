@@ -23,9 +23,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application),C
      * when userlogin data has changed, it means user succeed logged in.
      */
     var btnSelected: ObservableBoolean? = null
-    var username : ObservableField<String>? = null
+    var username: ObservableField<String>? = null
     var password: ObservableField<String>? = null
-    var userLogin : MutableLiveData<String>? =null
+    var userLogin: MutableLiveData<String>? = null
 
     init {
         btnSelected = ObservableBoolean(false)
@@ -38,6 +38,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application),C
     fun onUserNameChanged(s: CharSequence, start: Int, befor: Int, count: Int) {
         btnSelected?.set(Util.isUserNameValid(s.toString()))
     }
+
     //only password and password is right then login button is enable
     fun onPasswordChanged(s: CharSequence, start: Int, befor: Int, count: Int) {
         btnSelected?.set(Util.isPasswordValid(s.toString()))

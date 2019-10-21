@@ -26,10 +26,11 @@ class WithdrawLocalCache (
     //insert one withdraw each time
     fun insert(withdraw : Withdraw) {
         ioExecutor.execute {
-            Log.d("boxi","insert deposit amount : ${withdraw.amount}")
             withdrawDao?.insert(withdraw)
+            Log.d("boxi","insert deposit amount : ${withdraw.amount}")
         }
     }
+    //todo get the total mount
 
 
 }

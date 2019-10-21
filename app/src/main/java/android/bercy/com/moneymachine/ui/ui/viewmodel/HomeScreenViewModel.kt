@@ -3,8 +3,9 @@ package android.bercy.com.moneymachine.ui.ui.viewmodel
 import android.bercy.com.moneymachine.ui.data.MoneyMachineRepository
 import android.bercy.com.moneymachine.ui.model.Deposit
 import android.bercy.com.moneymachine.ui.model.Withdraw
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.*
+import kotlinx.coroutines.*
 
 
 /**
@@ -17,9 +18,22 @@ import androidx.lifecycle.ViewModel
  */
 class HomeScreenViewModel (private val repository: MoneyMachineRepository) : ViewModel() {
 
+    //total deposit
+    private val totalDeposit = MutableLiveData<Long>()
+
     //for search
     private val searchData = MutableLiveData<String>()
 
+    init {
+        //totalDeposit.postValue(repository.getTotalDeposit().value)
+        totalDeposit.postValue(repository.getTotalDeposit().value)
+        //postDepositValue()
+
+    }
+
+    private fun postDepositValue() = GlobalScope.launch {
+        totalDeposit.value = repository.getTotalDeposit().value
+    }
 
     /**
      * for insert deposit
@@ -35,6 +49,9 @@ class HomeScreenViewModel (private val repository: MoneyMachineRepository) : Vie
         repository.insertWithdrawData(withdraw)
     }
 
+    fun getTotalDeposit() : LiveData<Long> {
+        return totalDeposit
+    }
 
 
 }

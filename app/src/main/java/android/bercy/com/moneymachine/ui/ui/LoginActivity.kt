@@ -19,6 +19,8 @@ class LoginActivity : AppCompatActivity() {
     /**
      * The right implementation should be insert a user table before the app starting,
      * since this is not important for this test, I didn't optimize this part.
+     *
+     * forgot to use Injection class : (
      */
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,10 +28,10 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewmodel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         binding?.viewmodel = viewmodel
-        initObservables()
+        initLiveData()
     }
 
-    private fun initObservables() {
+    private fun initLiveData() {
         viewmodel?.userLogin?.observe(this, Observer {
             onSuccess()
         })
