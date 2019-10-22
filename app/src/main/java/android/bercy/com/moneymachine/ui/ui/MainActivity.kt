@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_main.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var spinner: Spinner
     private var formatted: String? = null
     private lateinit var viewModel : HomeScreenViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,15 +45,21 @@ class MainActivity : AppCompatActivity() {
     //observe the deposit and withdraw
     private fun initBalance() {
         viewModel.getTotalDeposit().observe(this, Observer {
-            calculateBalance(it)
+            displayTotalDeposit(it,0)
             Log.d("boxi","deposit amount has changed to $it")
+        })
+        viewModel.getTotalWithdraw().observe(this, Observer {
+            displayTotalDeposit(it,1)
         })
     }
 
     //calculate the balance
-    //todo need to minus withdraw
-    private fun calculateBalance(balance: Long?) {
-        tv_balance.text=balance.toString()
+    private fun displayTotalDeposit(amount:Long,i : Int) {
+        when(i) {
+            0 ->tv_total_deposit.text=getString(R.string.total_deposit,amount.toString())
+            1 ->tv_total_withdraw.text=getString(R.string.total_withdraw,amount.toString())
+        }
+
     }
 
     private fun setupSpinner() {
@@ -102,8 +106,7 @@ class MainActivity : AppCompatActivity() {
 
         tv_date.text = formatted
         ct_deposit_and_withdraw_layout.visibility = View.VISIBLE
-        ct_summary_layout.visibility = View.GONE
-        tv_user_name_deposit_withdraw.text=userName
+        tv_user_name_deposit_withdraw.text=getString(R.string.user,userName)
 
         if(view.id==depositButton.id) {
             enter_amount_button.text = getString(R.string.deposit)
@@ -160,7 +163,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         //for clear the text in edittext and make visible gone
-        ct_deposit_and_withdraw_layout.visibility = View.GONE
+        ct_deposit_and_withdraw_layout.visibility = View.INVISIBLE
         et_amount.text.clear()
         et_description.text.clear()
 

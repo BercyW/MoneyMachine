@@ -32,9 +32,7 @@ class DepositLocalCache(
 
 
     fun getTotalDepositAmount() : LiveData<Long> {
-
         return depositDao.getAllDepositAmount()
-
     }
 
 }

@@ -18,22 +18,10 @@ import kotlinx.coroutines.*
  */
 class HomeScreenViewModel (private val repository: MoneyMachineRepository) : ViewModel() {
 
-    //total deposit
-    private val totalDeposit = MutableLiveData<Long>()
 
     //for search
     private val searchData = MutableLiveData<String>()
 
-    init {
-        //totalDeposit.postValue(repository.getTotalDeposit().value)
-        totalDeposit.postValue(repository.getTotalDeposit().value)
-        //postDepositValue()
-
-    }
-
-    private fun postDepositValue() = GlobalScope.launch {
-        totalDeposit.value = repository.getTotalDeposit().value
-    }
 
     /**
      * for insert deposit
@@ -50,7 +38,11 @@ class HomeScreenViewModel (private val repository: MoneyMachineRepository) : Vie
     }
 
     fun getTotalDeposit() : LiveData<Long> {
-        return totalDeposit
+        return repository.getTotalDeposit()
+    }
+
+    fun getTotalWithdraw() : LiveData<Long> {
+        return repository.getTotalWithdraw()
     }
 
 

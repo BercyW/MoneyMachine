@@ -13,8 +13,8 @@
     <string name="summary">summary</string>
     <string name="description">Description</string>
     <string name="enter_amount">Enter Amount</string>
-    <string name="balance">Balance: %s</string>
-
+    <string name="total_deposit">Total Deposit: %s</string>
+    <string name="total_withdraw">Total withdraw: %s</string>
 
     <string-array name="tag_transaction">
         <item>Food</item>
