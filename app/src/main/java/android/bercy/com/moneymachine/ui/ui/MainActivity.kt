@@ -81,7 +81,6 @@ class MainActivity : AppCompatActivity() {
      * organize onclick event
      */
     fun onClick(view: View) {
-
         when(view.id) {
             R.id.deposit_button -> depositAndWithDrawUISetup(view)
             R.id.withdraw_button-> depositAndWithDrawUISetup(view)
@@ -134,33 +133,32 @@ class MainActivity : AppCompatActivity() {
 
          // for deposit
         if(enter_amount_button.text==getString(R.string.deposit)) {
+                //create obj
+                 Deposit().let {
+                    it.userName = userName
+                    it.amount = amount.toLong()
+                    it.description = description
+                    it.date = formatted
 
-            //create obj
-            val deposit = Deposit()
-            deposit.userName = userName
-            deposit.amount = amount.toLong()
-            deposit.description = description
-            deposit.date = formatted
-
-            //insert
-            viewModel.insertDepositMoney(deposit)
-            Toast.makeText(this, "You deposit $$amount", Toast.LENGTH_LONG).show()
-
+                    //insert
+                    viewModel.insertDepositMoney(it)
+                    Toast.makeText(this, "You deposit $$amount", Toast.LENGTH_LONG).show()
+                }
             //for withdraw
         }else if(enter_amount_button.text==getString(R.string.withdraw)) {
             val tag:String = spinner.selectedItem.toString()
 
             //create obj
-            val withdraw = Withdraw()
-            withdraw.userName=userName
-            withdraw.amount=amount.toLong()
-            withdraw.description=description
-            withdraw.date = formatted
-            withdraw.tag = tag
+            Withdraw().let {
+                it.userName = userName
+                it.amount = amount.toLong()
+                it.description = description
+                it.date = formatted
+                it.tag = tag
 
-            viewModel.insertWithdrawMoney(withdraw)
-            Toast.makeText(this, "You withdraw $$amount", Toast.LENGTH_LONG).show()
-
+                viewModel.insertWithdrawMoney(it)
+                Toast.makeText(this, "You withdraw $$amount", Toast.LENGTH_LONG).show()
+            }
         }
         //for clear the text in edittext and make visible gone
         ct_deposit_and_withdraw_layout.visibility = View.INVISIBLE
