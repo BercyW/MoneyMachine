@@ -44,11 +44,11 @@ class MainActivity : AppCompatActivity() {
     //observe the deposit and withdraw
     private fun initObserverForDepositAndWithdraw() {
         viewModel.getTotalDeposit().observe(this, Observer {
-            displayTotalDepositAndWithdraw(it,0)
+            displayTotalDepositAndWithdraw(it?:0,0)
             Log.d("boxi","deposit amount has changed to $it")
         })
         viewModel.getTotalWithdraw().observe(this, Observer {
-            displayTotalDepositAndWithdraw(it,1)
+            displayTotalDepositAndWithdraw(it?:0,1)
         })
     }
 
