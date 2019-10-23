@@ -2,6 +2,7 @@ package android.bercy.com.moneymachine.ui.ui.viewmodel
 
 import android.bercy.com.moneymachine.ui.data.MoneyMachineRepository
 import android.bercy.com.moneymachine.ui.model.Deposit
+import android.bercy.com.moneymachine.ui.model.DepositSearchResult
 import android.bercy.com.moneymachine.ui.model.Withdraw
 import android.util.Log
 import androidx.lifecycle.*
@@ -20,7 +21,19 @@ class HomeScreenViewModel (private val repository: MoneyMachineRepository) : Vie
 
 
     //for search
-    private val searchData = MutableLiveData<String>()
+    private val searchQuery = MutableLiveData<String>()
+
+    private val repoResult: LiveData<DepositSearchResult> = Transformations.map(searchQuery) {
+        repository.searchDepositTransaction(it)
+    }
+    /**
+     * in the future we have remote, than we can use networkErrors
+     */
+    val repos: LiveData<List<Deposit>> = Transformations.switchMap(repoResult) { it -> it.searchResult }
+    //for future use
+    val networkErrors: LiveData<String> = Transformations.switchMap(repoResult) { it ->
+        it.networkErrors
+    }
 
 
     /**
@@ -37,13 +50,28 @@ class HomeScreenViewModel (private val repository: MoneyMachineRepository) : Vie
         repository.insertWithdrawData(withdraw)
     }
 
+    /**
+     * get total deposit amount
+     */
     fun getTotalDeposit() : LiveData<Long> {
         return repository.getTotalDeposit()
     }
 
+    /**
+     * get total withdraw amount
+     */
     fun getTotalWithdraw() : LiveData<Long> {
         return repository.getTotalWithdraw()
     }
+
+    /**
+     * search deposit. When we have remote data source, we can create search result object, and use
+     * transformation.map to convert result object to deposit data.
+     */
+    fun searchDepositTransactions(query : String) {
+        searchQuery.postValue(query)
+    }
+
 
 
 }

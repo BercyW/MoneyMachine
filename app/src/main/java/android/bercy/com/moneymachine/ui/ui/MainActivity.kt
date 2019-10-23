@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,22 +38,22 @@ class MainActivity : AppCompatActivity() {
 
         setupSpinner()
 
-        initBalance()
+        initObserverForDepositAndWithdraw()
 
     }
     //observe the deposit and withdraw
-    private fun initBalance() {
+    private fun initObserverForDepositAndWithdraw() {
         viewModel.getTotalDeposit().observe(this, Observer {
-            displayTotalDeposit(it,0)
+            displayTotalDepositAndWithdraw(it,0)
             Log.d("boxi","deposit amount has changed to $it")
         })
         viewModel.getTotalWithdraw().observe(this, Observer {
-            displayTotalDeposit(it,1)
+            displayTotalDepositAndWithdraw(it,1)
         })
     }
 
     //calculate the balance
-    private fun displayTotalDeposit(amount:Long,i : Int) {
+    private fun displayTotalDepositAndWithdraw(amount:Long, i : Int) {
         when(i) {
             0 ->tv_total_deposit.text=getString(R.string.total_deposit,amount.toString())
             1 ->tv_total_withdraw.text=getString(R.string.total_withdraw,amount.toString())
@@ -84,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         when(view.id) {
             R.id.deposit_button -> depositAndWithDrawUISetup(view)
             R.id.withdraw_button-> depositAndWithDrawUISetup(view)
-            R.id.search_button -> searchLogic()
+            R.id.search_button -> ct_search_bar.visibility = View.VISIBLE
             R.id.summary_button -> summaryLogic()
         }
     }
@@ -119,7 +118,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * pressd enter button
+     * pressd enter button for deposit and withdraw
      */
     fun onEnterPressed(view: View) {
 
@@ -168,15 +167,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
-
-
-    /**
-     * for search
+    /***
+     * on go pressed in search section
      */
-    private fun searchLogic() {
+    fun onSearchPressed(view: View) {
+        /**
+         * for now only can be search deposit transaction
+         */
+        et_transaction_search.text.trim().let {
 
+            //need one more logic to check search query, and which table should be go
+            if (it.isNotEmpty() && it == "deposit") {
+                viewModel.searchDepositTransactions(it.toString())
+            }else {
+                Toast.makeText(this, "Only take deposit search word for now ", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     /**
@@ -185,6 +191,7 @@ class MainActivity : AppCompatActivity() {
     private fun summaryLogic() {
 
     }
+
 
 
 

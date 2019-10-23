@@ -1,8 +1,10 @@
 package android.bercy.com.moneymachine.ui.data
 
 import android.bercy.com.moneymachine.ui.model.Deposit
+import android.bercy.com.moneymachine.ui.model.DepositSearchResult
 import android.bercy.com.moneymachine.ui.model.Withdraw
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 
 /**
@@ -15,6 +17,9 @@ class MoneyMachineRepository (
     private val depositLocalCache:DepositLocalCache,
     private val withdrawLocalCache: WithdrawLocalCache
 ) {
+
+    // just for the future use
+    private val networkErrors = MutableLiveData<String>()
 
 
     /**
@@ -49,7 +54,11 @@ class MoneyMachineRepository (
 
 
     //todo search
-
+    fun searchDepositTransaction(query : String): DepositSearchResult {
+        networkErrors.postValue(null)
+        val searchResult = depositLocalCache.getTotalDepositTransaction()
+        return DepositSearchResult(searchResult,networkErrors)
+    }
 
     /**
      * below here for remote in the future, add boundary callback if using pagedlist

@@ -30,9 +30,14 @@ class DepositLocalCache(
         }
     }
 
-
+    //get total amount of deposit
     fun getTotalDepositAmount() : LiveData<Long> {
         return depositDao.getAllDepositAmount()
+    }
+
+    //get total deposit transaction
+    fun getTotalDepositTransaction() : LiveData<List<Deposit>>{
+        return depositDao.getAllDepositTransactions()
     }
 
 }

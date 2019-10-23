@@ -15,4 +15,7 @@ interface DepositDao{
 
     @Query("select SUM(amount) from deposit")
     fun getAllDepositAmount() : LiveData<Long>
+
+    @Query("select * from deposit")
+    fun getAllDepositTransactions() : LiveData<List<Deposit>>
 }
