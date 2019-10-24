@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         userName = intent.getStringExtra("UserName")
+        tv_summary_user_name.text=getString(R.string.user,userName)
+
 
         // get the view model
         viewModel = ViewModelProviders.of(this, Injection.provideViewModelFacotry(this))
@@ -38,17 +40,21 @@ class MainActivity : AppCompatActivity() {
 
         setupSpinner()
 
-        initObserverForDepositAndWithdraw()
+        initObserver()
 
     }
     //observe the deposit and withdraw
-    private fun initObserverForDepositAndWithdraw() {
+    private fun initObserver() {
         viewModel.getTotalDeposit().observe(this, Observer {
             displayTotalDepositAndWithdraw(it?:0,0)
             Log.d("boxi","deposit amount has changed to $it")
         })
         viewModel.getTotalWithdraw().observe(this, Observer {
             displayTotalDepositAndWithdraw(it?:0,1)
+        })
+
+        viewModel.result.observe(this, Observer {
+
         })
     }
 
@@ -99,6 +105,7 @@ class MainActivity : AppCompatActivity() {
         val current = LocalDateTime.now()
         //just show date not show exact time
         val formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy")
+
         formatted = current.format(formatter)
         Log.d("boxi","current date is $formatted")
 
@@ -177,10 +184,10 @@ class MainActivity : AppCompatActivity() {
         et_transaction_search.text.trim().let {
 
             //need one more logic to check search query, and which table should be go
-            if (it.isNotEmpty() && it == "deposit") {
+            if (it.isNotEmpty() && it == "close") {
                 viewModel.searchDepositTransactions(it.toString())
             }else {
-                Toast.makeText(this, "Only take deposit search word for now ", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Still Working on it ", Toast.LENGTH_LONG).show()
             }
         }
     }

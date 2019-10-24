@@ -23,15 +23,15 @@ class HomeScreenViewModel (private val repository: MoneyMachineRepository) : Vie
     //for search
     private val searchQuery = MutableLiveData<String>()
 
-    private val repoResult: LiveData<DepositSearchResult> = Transformations.map(searchQuery) {
+    private val searchResult: LiveData<DepositSearchResult> = Transformations.map(searchQuery) {
         repository.searchDepositTransaction(it)
     }
     /**
      * in the future we have remote, than we can use networkErrors
      */
-    val repos: LiveData<List<Deposit>> = Transformations.switchMap(repoResult) { it -> it.searchResult }
+    val result: LiveData<List<Deposit>> = Transformations.switchMap(searchResult) { it -> it.searchResult }
     //for future use
-    val networkErrors: LiveData<String> = Transformations.switchMap(repoResult) { it ->
+    val networkErrors: LiveData<String> = Transformations.switchMap(searchResult) { it ->
         it.networkErrors
     }
 
