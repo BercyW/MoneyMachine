@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var spinner: Spinner
     private var formatted: String? = null
     private lateinit var viewModel : HomeScreenViewModel
+    private val adapter = SearchAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +42,11 @@ class MainActivity : AppCompatActivity() {
         setupSpinner()
 
         initObserver()
-
     }
     //observe the deposit and withdraw
     private fun initObserver() {
+
+        rc_search.adapter = adapter
         viewModel.getTotalDeposit().observe(this, Observer {
             displayTotalDepositAndWithdraw(it?:0,0)
             Log.d("boxi","deposit amount has changed to $it")
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.result.observe(this, Observer {
-
+          //  adapter.
         })
     }
 
@@ -184,7 +186,7 @@ class MainActivity : AppCompatActivity() {
         et_transaction_search.text.trim().let {
 
             //need one more logic to check search query, and which table should be go
-            if (it.isNotEmpty() && it == "close") {
+            if (it.isNotEmpty() && it == "Deposit") {
                 viewModel.searchDepositTransactions(it.toString())
             }else {
                 Toast.makeText(this, "Still Working on it ", Toast.LENGTH_LONG).show()
